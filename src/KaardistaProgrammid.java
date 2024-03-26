@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class kaardistaProgrammid {
+public class KaardistaProgrammid {
     private List<String> programmid;
 //https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java#:~:text=NTSystem.getName%20%28%29%20returns%20the%20currently%20logged%20username%20at,System.getProperty%20%28%22user.name%22%29%20when%20running%20as%20a%20windows%20service.
     private static final String kasutajaNimi = System.getProperty("user.name");
@@ -22,7 +22,7 @@ public class kaardistaProgrammid {
         return programmid;
     }
 
-    public kaardistaProgrammid() throws IOException {
+    public KaardistaProgrammid() throws IOException {
         this.programmid = new ArrayList<>();
         this.programmid.addAll(exeNimekiri(kasutajaOtseteed, true));
         this.programmid.addAll(exeNimekiri(AllUsersOtseteed, true));
@@ -85,7 +85,7 @@ public class kaardistaProgrammid {
 }
 class testProgrammid {
     public static void main(String[] args) throws IOException {
-        List<String> programmid = new kaardistaProgrammid().getProgrammid();
+        List<String> programmid = new KaardistaProgrammid().getProgrammid();
         for (String exe : programmid) {
             System.out.println(exe);
         }
