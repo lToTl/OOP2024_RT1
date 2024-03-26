@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class kaardistaProgrammid {
     public static void main(String[] args) throws IOException{
@@ -67,8 +68,13 @@ public class kaardistaProgrammid {
                 }
                 String sihtfail = shortcut.getRealFilename();
                 laiend = shortcut.getRealFilename().substring(sihtfail.length()-4);
-                if(laiend.equals(".exe"))
-                    programmid.add(sihtfail);
+                if(laiend.equals(".exe")){
+                    String argumendid = shortcut.getCommandLineArguments();
+                    if(Objects.equals(argumendid, null))
+                        programmid.add(sihtfail);
+                    else
+                        programmid.add(sihtfail + " " + shortcut.getCommandLineArguments());
+                }
             }
         }
         return programmid;
