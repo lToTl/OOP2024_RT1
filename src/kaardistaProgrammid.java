@@ -1,5 +1,7 @@
-////CC BY-SA 4.0
-//POOLELI!
+// CC BY-SA 4.0
+// Funktsionaalselt valmis.
+// Kommenteerimata!
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -9,27 +11,27 @@ import java.util.List;
 import java.util.Objects;
 
 public class kaardistaProgrammid {
-    public static void main(String[] args) throws IOException{
+    private List<String> programmid;
 //https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java#:~:text=NTSystem.getName%20%28%29%20returns%20the%20currently%20logged%20username%20at,System.getProperty%20%28%22user.name%22%29%20when%20running%20as%20a%20windows%20service.
-        String kastajaNimi = System.getProperty("user.name");
-//
-        String kasutaja = "C:/Users/"+kastajaNimi+"/AppData/Roaming/Microsoft/Windows/Start Menu/Programs";
-        String k6ikKasutajad = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs";
-        String steam = "C:/Program Files (x86)/Steam/steamapps/common";
+    private static final String kasutajaNimi = System.getProperty("user.name");
+    private static final String kasutajaOtseteed = "C:/Users/"+ kasutajaNimi +"/AppData/Roaming/Microsoft/Windows/Start Menu/Programs";
+    private static final String AllUsersOtseteed = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs";
+    private static final String steamiKaust = "C:/Program Files (x86)/Steam/steamapps/common";
 
-        List<String> programmid = new ArrayList<>();
-        programmid.addAll(exedeNimekiri(kasutaja, true));
-        programmid.addAll(exedeNimekiri(k6ikKasutajad, true));
-        programmid.addAll(exedeNimekiri(steam, false));
-
-        for (String exe : programmid) {
-            System.out.println(exe);
-        }
-//
+    public List<String> getProgrammid() {
+        return programmid;
     }
+
+    public kaardistaProgrammid() throws IOException {
+        this.programmid = new ArrayList<>();
+        this.programmid.addAll(exeNimekiri(kasutajaOtseteed, true));
+        this.programmid.addAll(exeNimekiri(AllUsersOtseteed, true));
+        this.programmid.addAll(exeNimekiri(steamiKaust, false));
+    }
+
 //https://stackoverflow.com/questions/14676407/list-all-files-in-the-folder-and-also-sub-folders
 //    inspireeritud ülemisest postitusest, käib rekursiivselt läbi kõik alamkaustad ja lisab leitud failid nimekirja.
-    public static List<File> k6ikFailid(String directoryName, int rekursioone){
+    private static List<File> k6ikFailid(String directoryName, int rekursioone){
         File directory = new File(directoryName);
         // get all the files from a directory
         File[] fList = directory.listFiles();
@@ -43,7 +45,7 @@ public class kaardistaProgrammid {
         return resultList;
     }
 
-    private static ArrayList<String> exedeNimekiri(String aadress, boolean rekursiivne) throws IOException {
+    private static ArrayList<String> exeNimekiri(String aadress, boolean rekursiivne) throws IOException {
         List<File> listOfFiles = new ArrayList<>();
         if(rekursiivne) {
             listOfFiles = k6ikFailid(aadress, -1);
@@ -79,5 +81,13 @@ public class kaardistaProgrammid {
         }
         return programmid;
     }
-}
 
+}
+class testProgrammid {
+    public static void main(String[] args) throws IOException {
+        List<String> programmid = new kaardistaProgrammid().getProgrammid();
+        for (String exe : programmid) {
+            System.out.println(exe);
+        }
+    }
+}
