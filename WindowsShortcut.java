@@ -1,3 +1,4 @@
+////CC BY-SA 4.0
 //Loeb väärtused windows shortcutidest
 //https://github.com/maxvollmer/WindowsShortcuts/blob/main/org/stackoverflowusers/file/WindowsShortcut.java
 
