@@ -1,4 +1,4 @@
-// CC BY-SA 4.0
+// Kasutatud on paar rida koodi StackOverflow-st ja seega kaasneb litsents CC BY-SA 4.0
 // Funktsionaalselt valmis.
 // Kommenteerimata!
 
