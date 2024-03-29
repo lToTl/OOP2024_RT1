@@ -1,5 +1,3 @@
-//WORK IN PROGRESS
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -8,10 +6,6 @@ import java.util.Scanner;
 public class JärjekordneProduktiivsuseÄpp {
     public static void main(String[] args) throws IOException{
         TaskMonitor taskmonitor = new TaskMonitor();
-        File f = new File("rakendused.txt");
-        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee setup
-            Setup.LooRakendusedTXT();
-        }
 
         List<String[]> programmid =  Abi.loeFailListi("rakendused.txt");
 
@@ -24,7 +18,7 @@ public class JärjekordneProduktiivsuseÄpp {
         String ridaB = "1. peata jälgimine\n";
         String valikud = "2. \"Im feeling lucky\" - ava juhuslik rakendus\n" +
                 "3. näita rakendusi\n" +
-                "4. näita skoori\n" +
+                "4. näita seisu\n" +
                 "5. tee setup uuesti\n" +
                 "6. EXIT\n" +
                 "--------------------------------\n" +
@@ -51,7 +45,7 @@ public class JärjekordneProduktiivsuseÄpp {
                     continue;
                 }
                 case "2":{
-                    App.avaSuvaline(programmid);
+                    App.käivitaSuvaline(programmid);
                     System.out.print("tee valik: ");
                     continue;
                 }
@@ -72,6 +66,8 @@ public class JärjekordneProduktiivsuseÄpp {
                     continue;
                 }
                 case "4":{
+                    if(taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
+                    else System.out.print("Jälgimine: seisab; ");
                     System.out.println("Hetke skoor: " + taskmonitor.getSkoor());
                     System.out.print("tee valik: ");
                     continue;

@@ -29,7 +29,7 @@ public class App {
         }
     }
 
-    public static void avaSuvaline(List<String[]> programmid){
+    public static void käivitaSuvaline(List<String[]> programmid){
         int suvaline = (int) (Math.random()*programmid.size());
         System.out.println("avati rakendus: " + programmid.get(suvaline)[0]);
         käivita(programmid.get(suvaline)[1]);
