@@ -19,7 +19,7 @@ public class Setup {
         String s6num = "\nEemalda neutraalsed rakendused, mis ei mõjuta produktiivsust sisestades rakenduse numbri" +
                 "\nJärgmisesse etappi liikumiseks sisesta 'jätka'" +
                 "\n sisend: ";
-        esitaProgrammid(programmid,1);
+        Abi.esitaProgrammid(programmid,1);
         //küsi kasutajalt millised programmid nimekirjast eemaldada
         //kuni vastuseni "jätka"
         System.out.print(s6num);
@@ -35,8 +35,8 @@ public class Setup {
                 System.out.print("Vale sisend. Proovi uuesti: ");
                 continue;
             }
-            CMD.cls();
-            esitaProgrammid(programmid,1);
+            Abi.cls();
+            Abi.esitaProgrammid(programmid,1);
             System.out.print(s6num);
         }
 
@@ -44,13 +44,14 @@ public class Setup {
         //kuni vastuseni "jätka"
         System.out.println("\n");
         List<String> produktiivsed = new ArrayList<>();
+        Abi.cls();
         System.out.print("Järgnevalt kategoriseeri rakendused produktiivseteks ja ebaproduktiivseteks sisestades programmi numbri (Enter):");
         kasutajaValik = reaLugeja.nextLine();
         System.out.println("Ebaproduktiivsed");
-        esitaProgrammid(programmid,1);
+        Abi.esitaProgrammid(programmid,1);
         System.out.println("Produktiivsed");
-        esitaProgrammid(produktiivsed, programmid.size() + 1);
-        s6num = "Liiguta rakendusi sisestades rakenduse numbri" +
+        Abi.esitaProgrammid(produktiivsed, programmid.size() + 1);
+        s6num = "Liiguta rakendusi sisestades rakenduse numbri. Jätkamiseks sisesta 'jätka'" +
                 "\n sisend: ";
         System.out.print(s6num);
         kasutajaValik = "";
@@ -76,11 +77,11 @@ public class Setup {
                 System.out.print("Vale sisend. Proovi uuesti: ");
                 continue;
             }
-            CMD.cls();
+            Abi.cls();
             System.out.println("Ebaproduktiivsed");
-            esitaProgrammid(programmid,1);
+            Abi.esitaProgrammid(programmid,1);
             System.out.println("\nProduktiivsed");
-            esitaProgrammid(produktiivsed, programmid.size() + 1);
+            Abi.esitaProgrammid(produktiivsed, programmid.size() + 1);
             System.out.print(s6num);
         }
 
@@ -99,13 +100,5 @@ public class Setup {
         fileWriter.close();
     }
 
-    private static void esitaProgrammid(List<String> programmid, int algusIndeks){
-        String exeNimi;
-        System.out.println("*".repeat(50));
-        for (String exe : programmid) {
-            exeNimi = exe.substring(exe.lastIndexOf('\\') + 1);
-            System.out.println("("+algusIndeks+++") "+exeNimi);
-        }
-        System.out.println("*".repeat(50));
-    }
+
 }

@@ -1,3 +1,4 @@
+//sulge programm veel puudu
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -5,8 +6,8 @@ import java.util.List;
 
 // Anda 'path' muutujale mingi appi absoluutne path.
 // meetod 'käivita' paneb selle appi tööle
-public class AvaApp {
-    public static void main(String[] args) throws IOException {
+public class App {
+    public static void main(String[] args) {
         String path = "C:/Program Files (x86)/Steam/steam.exe"; // Tee muudatus vastavalt oma rakenduse asukohale
 
         // Ava rakendus
@@ -30,6 +31,10 @@ public class AvaApp {
 
     public static void avaSuvaline(List<String[]> programmid){
         int suvaline = (int) (Math.random()*programmid.size());
+        System.out.println("avati rakendus: " + programmid.get(suvaline)[0]);
         käivita(programmid.get(suvaline)[1]);
+    }
+    public static void sulge(String exeNimi){
+
     }
 }
