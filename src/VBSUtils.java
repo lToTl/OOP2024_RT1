@@ -58,6 +58,9 @@ public class VBSUtils {
                 i = 0;
             }
         }
+        for (String process : processes) {
+            System.out.println(process);
+        }
         msgBox("Running processes : " + result);
     }
 
