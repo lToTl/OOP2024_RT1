@@ -47,7 +47,7 @@ public class Abi {
         }
         return 0;
     }
-    public static void cls() {
+    public static void cls() { // puhasta konsool
 //        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         System.out.println("\n".repeat(50));
     }

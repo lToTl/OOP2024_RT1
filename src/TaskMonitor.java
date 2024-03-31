@@ -21,6 +21,7 @@ public class TaskMonitor implements Runnable{
         return running;
     }
 
+    // konstruktor
     public TaskMonitor() throws IOException {
         this.skoor = 0;
         programmidMap = new HashMap<>();
@@ -35,7 +36,6 @@ public class TaskMonitor implements Runnable{
                 if (logi.get(viimane)[0].equals(tänaneKuupäev))
                     skoor = Integer.parseInt(logi.get(viimane)[2]);
             }
-
         }
         List<String[]> programmid = Abi.loeFailListi("rakendused.txt");
         for (String[] exe : programmid) {
