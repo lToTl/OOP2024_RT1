@@ -31,8 +31,10 @@ public class TaskMonitor implements Runnable{
             String tänaneKuupäev = new SimpleDateFormat("yyyy.MM.dd").format(new java.util.Date());
             logi = Abi.loeFailListi("log.txt");
             int viimane = logi.size()-1;
-            if (logi.get(viimane)[0].equals(tänaneKuupäev))
-                skoor = Integer.parseInt(logi.get(viimane)[2]);
+            if(viimane >= 0){
+                if (logi.get(viimane)[0].equals(tänaneKuupäev))
+                    skoor = Integer.parseInt(logi.get(viimane)[2]);
+            }
 
         }
         List<String[]> programmid = Abi.loeFailListi("rakendused.txt");

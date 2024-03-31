@@ -4,10 +4,16 @@ import java.util.Scanner;
 
 //põhiklass
 public class JärjekordneProduktiivsuseÄpp {
-    public static void main(String[] args) throws IOException{
-        TaskMonitor taskmonitor = new TaskMonitor();
+    public static void main(String[] args) throws IOException {
+                //Kontrolli kas rakendused.txt eksisteerib
 
-        List<String[]> programmid =  Abi.loeFailListi("rakendused.txt");
+        File f = new File("rakendused.txt"); //kontrolli log.txt olemasolu ja vajadusel loo see
+        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee loo see
+            //setup
+            Setup.LooRakendusedTXT();
+        }
+        TaskMonitor taskmonitor = new TaskMonitor();
+            List<String[]> programmid = Abi.loeFailListi("rakendused.txt");
 
         //UI
         Scanner reaLugeja = new Scanner(System.in);
@@ -74,24 +80,24 @@ public class JärjekordneProduktiivsuseÄpp {
                 }
                 case "5":{
 
-                    Abi.cls();
-                    Setup.LooRakendusedTXT();
-                    Abi.cls();
-                    if (taskmonitor.isRunning())
-                        System.out.print(menüüB);
-                    else
-                        System.out.print(menüüA);
-                    continue;
-                }
-                case "6":{
-                    taskmonitor.stop();
-                    break A;
-                }
-                default:{
-                    System.out.print("Vigane sisend. Proovi uuesti: ");
+                        Abi.cls();
+                        Setup.LooRakendusedTXT();
+                        Abi.cls();
+                        if (taskmonitor.isRunning())
+                            System.out.print(menüüB);
+                        else
+                            System.out.print(menüüA);
+                        continue;
+                    }
+                    case "6": {
+                        taskmonitor.stop();
+                        break A;
+                    }
+                    default: {
+                        System.out.print("Vigane sisend. Proovi uuesti: ");
+                    }
                 }
             }
         }
-    }
 
-}
+    }
