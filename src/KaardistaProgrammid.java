@@ -1,6 +1,4 @@
 // Kasutatud on paar rida koodi StackOverflow-st ja seega kaasneb litsents CC BY-SA 4.0
-// Funktsionaalselt valmis.
-// Kommenteerimata!
 // Tulevikus võiks leida steami installatsiooni aadressi windowsi registrist juhuks kui see on erinev default-ist
 // Tulevikus saaks leida ka kõik käsitsi loodu steami library-id vaadates faili "*/Steam/config/libraryfolders.vdf"
 
