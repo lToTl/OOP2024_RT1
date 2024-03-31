@@ -12,7 +12,7 @@ Järjekordne Produktiivsuse Äpp ...
 * Eeldab, et Steam on installeeritud vaikekausta C:\Program Files(x86)\Steam
     ja mänguraamatukogusid on ainult üks ning see asub Steami kaustas
 
-* Käsurealt töötamiseks eeldab, et windowsi on seadistatud käsureal kasutama UTF-8 kodeeringut
+* Käsurealt töötamiseks eeldab, et windows on seadistatud käsureal kasutama UTF-8 kodeeringut
 
   https://stackoverflow.com/questions/57131654/using-utf-8-encoding-chcp-65001-in-command-prompt-windows-powershell-window
 
@@ -41,4 +41,5 @@ Järjekordne Produktiivsuse Äpp ...
 
 ### Mis võiks veel juures olla
 * Leida Steami kaust Windowsi registrist
+* Leida teiste platvormide mängud
 * Leida kõik Steami mänguraamatukogud
