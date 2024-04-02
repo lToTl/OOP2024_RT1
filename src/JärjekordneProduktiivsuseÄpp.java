@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -62,14 +63,39 @@ public class JärjekordneProduktiivsuseÄpp {
                     Abi.esitaProgrammidA(programmid.subList(0, ebaproduktiivseid - 1), 1); // esita programmide alamnimekiri kus on ainult ebaproduktiivsed, nummerdamist alusta 1-st)
                     System.out.println("\nProduktiivsed");
                     Abi.esitaProgrammidA(programmid.subList(ebaproduktiivseid - 1, programmid.size()), ebaproduktiivseid); //esita programmide alamnimekiri kus on ainult produktiivsed, jätka nummerdamist viimasest ebaproduktiivsest
-                    System.out.print("jätkamiseks vajuta Enter");
-                    kastajaValik = reaLugeja.nextLine();
-                    Abi.cls();
-                    if (taskmonitor.isRunning())
-                        System.out.print(menüüB);
-                    else
-                        System.out.print(menüüA);
-                    continue;
+                    System.out.println("rakenduse avamiseks sisesta rakendusele vastav number");
+                    System.out.print("menüüsse naasmiseks vajuta Enter");
+                    while (true) {
+                        kastajaValik = reaLugeja.nextLine();
+                        if (kastajaValik.isEmpty()) {
+                            Abi.cls();
+                            if (taskmonitor.isRunning())
+                                System.out.print(menüüB);
+                            else
+                                System.out.print(menüüA);
+                            break;
+                        }
+                        else {
+                            try {
+                                int valik;
+                                valik = Integer.valueOf(kastajaValik);
+                                if (valik > programmid.size() || valik < 0) {
+                                    System.out.print("Vigane sisend. Proovi uuesti: ");
+                                } else if (taskmonitor.getSkoor() < 1 && programmid.get(valik - 1)[2].equals("0")) {
+                                    System.out.println("Teie skoor on liiga madal ebaproduktiivsete rakenduste kasutamiseks!");
+                                    System.out.println("Skoori suurendamiseks veeda aega produktiivsetes rakendustes.");
+                                    System.out.println("\nrakenduse avamiseks sisesta rakendusele vastav number");
+                                    System.out.print("menüüsse naasmiseks vajuta Enter: ");
+                                } else {
+                                    System.out.print("Peagi avatakse rakendus: " + programmid.get(valik - 1)[0]);
+                                    Abi.käivita(programmid.get(valik - 1)[1]);
+                                    break;
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.print("Vigane sisend. Proovi uuesti: ");
+                            }
+                        }
+                    }
                 }
                 case "4": { // 4. näita seisu
                     if (taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
