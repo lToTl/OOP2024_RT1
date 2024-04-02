@@ -82,17 +82,25 @@ public class JärjekordneProduktiivsuseÄpp {
                                 if (valik > programmid.size() || valik < 0) {
                                     System.out.print("Vigane sisend. Proovi uuesti: ");
                                 } else if (taskmonitor.getSkoor() < 1 && programmid.get(valik - 1)[2].equals("0")) {
-                                    System.out.println("Teie skoor on liiga madal ebaproduktiivsete rakenduste kasutamiseks!");
+                                    System.out.println("\nTeie skoor on liiga madal ebaproduktiivsete rakenduste kasutamiseks!");
                                     System.out.println("Skoori suurendamiseks veeda aega produktiivsetes rakendustes.");
                                     System.out.println("\nrakenduse avamiseks sisesta rakendusele vastav number");
                                     System.out.print("menüüsse naasmiseks vajuta Enter: ");
                                 } else {
                                     System.out.print("Peagi avatakse rakendus: " + programmid.get(valik - 1)[0]);
                                     Abi.käivita(programmid.get(valik - 1)[1]);
+                                    Thread.sleep(5000);
+                                    Abi.cls();
+                                    if (taskmonitor.isRunning())
+                                        System.out.print(menüüB);
+                                    else
+                                        System.out.print(menüüA);
                                     break;
                                 }
                             } catch (NumberFormatException e) {
                                 System.out.print("Vigane sisend. Proovi uuesti: ");
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
                             }
                         }
                     }
