@@ -89,7 +89,7 @@ public class JärjekordneProduktiivsuseÄpp {
                                 } else {
                                     System.out.print("Peagi avatakse rakendus: " + programmid.get(valik - 1)[0]);
                                     Abi.käivita(programmid.get(valik - 1)[1]);
-                                    Thread.sleep(5000);
+                                    Thread.sleep(4000);
                                     Abi.cls();
                                     if (taskmonitor.isRunning())
                                         System.out.print(menüüB);
