@@ -18,18 +18,19 @@ public class Setup {
                 "\nJärgmisesse etappi liikumiseks sisesta 'jätka'" +
                 "\n sisend: ";
         Abi.esitaProgrammid(programmid,1);
-        //küsi kasutajalt millised programmid nimekirjast eemaldada
-        //kuni vastuseni "jätka"
+
+        // küsi kasutajalt millised programmid nimekirjast eemaldada
+        // kuni vastuseni "jätka"
         System.out.print(s6num);
         kasutajaValik = "";
-        while(!Objects.equals(kasutajaValik, "jätka")){
+        while(!Objects.equals(kasutajaValik, "jätka")){ // nullsafe equals
             kasutajaValik = reaLugeja.nextLine();
             if(kasutajaValik.equals("jätka")) continue;
             try{
                 int valik = Integer.parseInt(kasutajaValik);
-                if(valik < 0 || valik > programmid.size()) throw (new Exception());
-                programmid.remove(valik-1);
-            }catch (Exception e) {
+                if(valik < 0 || valik > programmid.size()) throw (new Exception()); // kui valik on võimalik
+                programmid.remove(valik-1); // eemalda programm nimekirjast
+            }catch (Exception e) { // püüa kinni valed sisendid
                 System.out.print("Vale sisend. Proovi uuesti: ");
                 continue;
             }
@@ -38,10 +39,10 @@ public class Setup {
             System.out.print(s6num);
         }
 
-        //küsi millised programmidest on produktiivsed
-        //kuni vastuseni "jätka"
+        // küsi millised programmidest on produktiivsed
+        // kuni vastuseni "jätka"
         System.out.println("\n");
-        List<String> produktiivsed = new ArrayList<>();
+        List<String> produktiivsed = new ArrayList<>(); // loo uus järjend produktiivsete rakenduste jaoks
         Abi.cls();
         System.out.print("Järgnevalt kategoriseeri rakendused produktiivseteks ja ebaproduktiivseteks sisestades programmi numbri (Enter):");
         kasutajaValik = reaLugeja.nextLine();
@@ -53,21 +54,21 @@ public class Setup {
                 "\n sisend: ";
         System.out.print(s6num);
         kasutajaValik = "";
-        int summa = programmid.size();
-        while(!Objects.equals(kasutajaValik, "jätka")){
+        int summa = programmid.size(); // summa lubab meil programme tagasi ka liigutada ebaproduktiivseteks
+        while(!Objects.equals(kasutajaValik, "jätka")){ // null-safe equals
             int valik;
-            kasutajaValik = reaLugeja.nextLine();
-            if(kasutajaValik.equals("jätka")) continue;
-            try{
+            kasutajaValik = reaLugeja.nextLine(); // kasutaja sisend
+            if(kasutajaValik.equals("jätka")) continue; // jäta katki kui sisend on jätka
+            try{ // proovi muuta sõne täisarvuks
                 valik = Integer.parseInt(kasutajaValik);
-                if(valik <= 0 || valik > summa){
+                if(valik <= 0 || valik > summa){ // kui number ei vasta mõnele programmile, siis anna veateade
                     throw (new Exception());
                 }
-                if (valik <= programmid.size()) {
+                if (valik <= programmid.size()) { // kui number vastab mõnele programmile ebaproduktiivsete nimekirjas, siis liiguta see produktiivsete nimekirja
                     produktiivsed.add(programmid.get(valik - 1));
                     programmid.remove(valik - 1);
                 }
-                else {
+                else { // kui number vastab mõnele programmile produktiivsete nimekirjas, siis liiguta see ebaproduktiivsete nimekirja
                     programmid.add(produktiivsed.get(valik - 1 - programmid.size()));
                     produktiivsed.remove((valik - programmid.size()));
                 }
@@ -83,8 +84,8 @@ public class Setup {
             System.out.print(s6num);
         }
 
-        //salvesta tulemus faili rakendused.txt
-
+        // salvesta tulemus faili rakendused.txt
+        // kujul: exeNimi; exe aadress; 0 kui ebaproduktiivne ja 1 kui produktiivne
         FileWriter fileWriter = new FileWriter("rakendused.txt");
         String exeNimi;
         for (String exe : programmid) {

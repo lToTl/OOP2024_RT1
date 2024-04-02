@@ -13,8 +13,8 @@ import java.util.Objects;
 public class KaardistaProgrammid {
     private List<String> programmid;
 //https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java#:~:text=NTSystem.getName%20%28%29%20returns%20the%20currently%20logged%20username%20at,System.getProperty%20%28%22user.name%22%29%20when%20running%20as%20a%20windows%20service.
-    private static final String kasutajaNimi = System.getProperty("user.name");
-    private static final String kasutajaOtseteed = "C:/Users/"+ kasutajaNimi +"/AppData/Roaming/Microsoft/Windows/Start Menu/Programs";
+    private static final String kasutajaNimi = System.getProperty("user.name"); // leia Windowsis aktiivse kasutaja nimi
+    private static final String kasutajaOtseteed = "C:/Users/"+ kasutajaNimi +"/AppData/Roaming/Microsoft/Windows/Start Menu/Programs"; // aktiivse kasutaja otseteed
     private static final String AllUsersOtseteed = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs";
     private static final String steamiKaust = "C:/Program Files (x86)/Steam/steamapps/common";
 
@@ -22,7 +22,7 @@ public class KaardistaProgrammid {
         return programmid;
     }
 
-    public KaardistaProgrammid() throws IOException {
+    public KaardistaProgrammid() throws IOException { // konstruktor
         this.programmid = new ArrayList<>();
         this.programmid.addAll(exeNimekiri(kasutajaOtseteed, true));
         this.programmid.addAll(exeNimekiri(AllUsersOtseteed, true));
@@ -44,22 +44,22 @@ public class KaardistaProgrammid {
         }
         return resultList;
     }
-
+    // genereerib massiivi kõigist exe failide asukohtadest kasutades windows shortcutide target aadressi
     private static ArrayList<String> exeNimekiri(String aadress, boolean rekursiivne) throws IOException {
-        List<File> listOfFiles = new ArrayList<>();
+        List<File> listOfFiles = new ArrayList<>(); // lähesta tühi massiiv
         if(rekursiivne) {
-            listOfFiles = k6ikFailid(aadress, -1);
+            listOfFiles = k6ikFailid(aadress, -1); // genereeri failide nimekiri minnes failipuus lõpuni
         }
         if(!rekursiivne){
-            listOfFiles = k6ikFailid(aadress, 1);
+            listOfFiles = k6ikFailid(aadress, 1); // genereeri failide nimekiri minnes ainult ühe kausta võrra sügavamale
         }
 
-        ArrayList<String> programmid = new ArrayList<>();
-        for (File file : listOfFiles) {
+        ArrayList<String> programmid = new ArrayList<>();  // loo tühi massiiv exe failide jaoks
+        for (File file : listOfFiles) { // käi läbi kõik failid nimekirjas
             String failiAadress = file.getAbsolutePath();
-            String laiend = failiAadress.substring(failiAadress.length()-4);
-            if(file.isFile() && laiend.equals(".exe")){
-                programmid.add(failiAadress);
+            String laiend = failiAadress.substring(failiAadress.length()-4); // kontrolli faililaiendit
+            if(file.isFile() && laiend.equals(".exe")){ // kui faililaiend on .exe
+                programmid.add(failiAadress); // siis lisa prorammide nimekirja
             }
             if (!file.isDirectory() && WindowsShortcut.isPotentialValidLink(file)){
                 WindowsShortcut shortcut;
@@ -82,12 +82,4 @@ public class KaardistaProgrammid {
         return programmid;
     }
 
-}
-class testProgrammid {
-    public static void main(String[] args) throws IOException {
-        List<String> programmid = new KaardistaProgrammid().getProgrammid();
-        for (String exe : programmid) {
-            System.out.println(exe);
-        }
-    }
 }

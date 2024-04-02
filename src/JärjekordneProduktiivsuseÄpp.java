@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -8,17 +9,17 @@ public class JärjekordneProduktiivsuseÄpp {
                 //Kontrolli kas rakendused.txt eksisteerib
 
         File f = new File("rakendused.txt"); //kontrolli log.txt olemasolu ja vajadusel loo see
-        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee loo see
-            //setup
+        if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee setup ja loo rakendused.txt
             Setup.LooRakendusedTXT();
         }
         TaskMonitor taskmonitor = new TaskMonitor();
-            List<String[]> programmid = Abi.loeFailListi("rakendused.txt");
+        List<String[]> programmid = Abi.loeFailListi("rakendused.txt");
+
 
         //UI
-        Scanner reaLugeja = new Scanner(System.in);
+        Scanner reaLugeja = new Scanner(System.in); //lähesta kasutajaliidese sisend
         String kastajaValik = "";
-        String päis = " Järjekordne Produktiivsuse Äpp\n" +
+        String päis = " Järjekordne Produktiivsuse Äpp\n" + //salvestame menüü hilisemaks kasutamiseks
                 "--------------------------------\n";
         String ridaA = "1. alusta jälgimist\n";
         String ridaB = "1. peata jälgimine\n";
@@ -29,39 +30,38 @@ public class JärjekordneProduktiivsuseÄpp {
                 "6. EXIT\n" +
                 "--------------------------------\n" +
                 "tee valik: ";
-        String menüüA = päis + ridaA + valikud;
-        String menüüB = päis + ridaB + valikud;
-        Abi.cls();
+        String menüüA = päis + ridaA + valikud; //menüü juhuks kui taskmonitor seisab
+        String menüüB = päis + ridaB + valikud; //menüü juhuks kui taskmonitor on aktiivne
+        Abi.cls(); //genereeri 50 tühja rida, ehk puhasta konsool
         System.out.print(menüüA);
-        A:
-        while (true){
-            kastajaValik = reaLugeja.nextLine();
-            switch (kastajaValik){
-                case "1":{
+        A: // lipp, et programmist väljuda (et 'break' kehtiks while loopi kohta)
+        while (true) { //peamenüü loop
+            kastajaValik = reaLugeja.nextLine(); // kasutaja sisend
+            switch (kastajaValik) {
+                case "1": { // 1. alusta jälgimist / peata jälgimine
                     Abi.cls();
-                    if (!taskmonitor.isRunning()){
-                        Thread lõim = new Thread(taskmonitor);
-                        lõim.start();
+                    if (!taskmonitor.isRunning()) { // kui taskmonitor ei tööta -
+                        Thread lõim = new Thread(taskmonitor); // siis loo uus lõim taskmonitori jaoks
+                        lõim.start(); // käivita lõim
                         System.out.print(menüüB);
-                    }
-                    else {
-                        taskmonitor.stop();
+                    } else { // kui taskmonitor käib -
+                        taskmonitor.stop(); // peata taskmonitor
                         System.out.print(menüüA);
                     }
                     continue;
                 }
-                case "2":{
-                    App.käivitaSuvaline(programmid);
+                case "2": { // 2. "Im feeling lucky"
+                    Abi.käivitaSuvaline(programmid);
                     System.out.print("tee valik: ");
                     continue;
                 }
-                case "3":{
+                case "3": { // 3. näita rakendusi
                     Abi.cls();
                     int ebaproduktiivseid = Abi.leiaEbaproduktiivseteArv(programmid);
                     System.out.println("Ebaproduktiivsed");
-                    Abi.esitaProgrammidA(programmid.subList(0,ebaproduktiivseid-1),1);
+                    Abi.esitaProgrammidA(programmid.subList(0, ebaproduktiivseid - 1), 1); // esita programmide alamnimekiri kus on ainult ebaproduktiivsed, nummerdamist alusta 1-st)
                     System.out.println("\nProduktiivsed");
-                    Abi.esitaProgrammidA(programmid.subList(ebaproduktiivseid-1,programmid.size()), ebaproduktiivseid);
+                    Abi.esitaProgrammidA(programmid.subList(ebaproduktiivseid - 1, programmid.size()), ebaproduktiivseid); //esita programmide alamnimekiri kus on ainult produktiivsed, jätka nummerdamist viimasest ebaproduktiivsest
                     System.out.print("jätkamiseks vajuta Enter");
                     kastajaValik = reaLugeja.nextLine();
                     Abi.cls();
@@ -71,32 +71,32 @@ public class JärjekordneProduktiivsuseÄpp {
                         System.out.print(menüüA);
                     continue;
                 }
-                case "4":{
-                    if(taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
+                case "4": { // 4. näita seisu
+                    if (taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
                     else System.out.print("Jälgimine: seisab; ");
                     System.out.println("Hetke skoor: " + taskmonitor.getSkoor());
                     System.out.print("tee valik: ");
                     continue;
                 }
-                case "5":{
+                case "5": { // 5. tee setup uuesti
 
-                        Abi.cls();
-                        Setup.LooRakendusedTXT();
-                        Abi.cls();
-                        if (taskmonitor.isRunning())
-                            System.out.print(menüüB);
-                        else
-                            System.out.print(menüüA);
-                        continue;
-                    }
-                    case "6": {
-                        taskmonitor.stop();
-                        break A;
-                    }
-                    default: {
-                        System.out.print("Vigane sisend. Proovi uuesti: ");
-                    }
+                    Abi.cls();
+                    Setup.LooRakendusedTXT();
+                    Abi.cls();
+                    if (taskmonitor.isRunning())
+                        System.out.print(menüüB);
+                    else
+                        System.out.print(menüüA);
+                    continue;
                 }
+                case "6": { // 6. EXIT
+                    taskmonitor.stop();
+                    break A;
+                }
+                default: {
+                    System.out.print("Vigane sisend. Proovi uuesti: ");
+                }
+            }
             }
         }
 

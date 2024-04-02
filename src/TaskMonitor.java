@@ -24,7 +24,7 @@ public class TaskMonitor implements Runnable{
     // konstruktor
     public TaskMonitor() throws IOException {
         this.skoor = 0;
-        programmidMap = new HashMap<>();
+
         File f = new File("log.txt"); //kontrolli log.txt olemasolu ja vajadusel loo see
         if (!f.isFile()) { // kui log.txt on puudu, siis tee loo see
             f.createNewFile();
@@ -37,11 +37,13 @@ public class TaskMonitor implements Runnable{
                     skoor = Integer.parseInt(logi.get(viimane)[2]);
             }
         }
+        //lae rakendused.txt dictionarisse
+        programmidMap = new HashMap<>();
         List<String[]> programmid = Abi.loeFailListi("rakendused.txt");
         for (String[] exe : programmid) {
-            programmidMap.put(exe[0], new String[]{exe[1], exe[2]});
+            programmidMap.put(exe[0], new String[]{exe[1], exe[2]}); //sõnastiku võtmeks on exe faili nimi ja väärtuseks on järjend elementidega: {String exe faili absoluutne aadress, boolean eba-/produktiivne}
         }
-        //lae rakendused.txt dictionarisse
+
     }
 
     public int getSkoor() {
@@ -88,7 +90,6 @@ public class TaskMonitor implements Runnable{
         }
 
     }
-    public void stop(){running = false;}
-
+    public void stop(){running = false;} //lipp lõime pehmeks sulgemiseks
 
 }
