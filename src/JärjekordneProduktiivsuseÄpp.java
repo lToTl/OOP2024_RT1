@@ -67,7 +67,7 @@ public class JärjekordneProduktiivsuseÄpp {
                     System.out.print("menüüsse naasmiseks vajuta Enter");
                     while (true) {
                         kastajaValik = reaLugeja.nextLine();
-                        if (kastajaValik.isEmpty()) {
+                        if (kastajaValik.isEmpty()) { // kasutaja sisestas Enter
                             Abi.cls();
                             if (taskmonitor.isRunning())
                                 System.out.print(menüüB);
@@ -79,9 +79,9 @@ public class JärjekordneProduktiivsuseÄpp {
                             try {
                                 int valik;
                                 valik = Integer.valueOf(kastajaValik);
-                                if (valik > programmid.size() || valik < 0) {
+                                if (valik > programmid.size() || valik < 1) { // kasutaja valik on massiivist väljas
                                     System.out.print("Vigane sisend. Proovi uuesti: ");
-                                } else if (taskmonitor.getSkoor() < 1 && programmid.get(valik - 1)[2].equals("0")) {
+                                } else if (taskmonitor.getSkoor() < 1 && programmid.get(valik - 1)[2].equals("0")) { // kasutaja tahab avada ebaproduktiivset rakendust, kui skoor on alla nulli
                                     System.out.println("\nTeie skoor on liiga madal ebaproduktiivsete rakenduste kasutamiseks!");
                                     System.out.println("Skoori suurendamiseks veeda aega produktiivsetes rakendustes.");
                                     System.out.println("\nrakenduse avamiseks sisesta rakendusele vastav number");
@@ -89,7 +89,7 @@ public class JärjekordneProduktiivsuseÄpp {
                                 } else {
                                     System.out.print("Peagi avatakse rakendus: " + programmid.get(valik - 1)[0]);
                                     Abi.käivita(programmid.get(valik - 1)[1]);
-                                    Thread.sleep(4000);
+                                    Thread.sleep(4000); // annab arvutile aega rakendus avada
                                     Abi.cls();
                                     if (taskmonitor.isRunning())
                                         System.out.print(menüüB);
