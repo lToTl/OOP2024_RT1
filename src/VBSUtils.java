@@ -1,4 +1,6 @@
+//CC BY-NC-SA 2.5 CA
 //https://www.rgagnon.com/javadetails/java-0593.html
+//tagastab nimekirja hetkel töötavatest protsessidest kasutades VBScript-i
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;

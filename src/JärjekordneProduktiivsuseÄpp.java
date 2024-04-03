@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 //põhiklass
 public class JärjekordneProduktiivsuseÄpp {
-    public static void main(String[] args) throws IOException {
-                //Kontrolli kas rakendused.txt eksisteerib
+    public static void main(String[] args) throws IOException, InterruptedException {
+        //Kontrolli kas rakendused.txt eksisteerib
 
         File f = new File("rakendused.txt"); //kontrolli log.txt olemasolu ja vajadusel loo see
         if (!f.isFile()) { // kui rakendused.txt on puudu, siis tee setup ja loo rakendused.txt
@@ -50,6 +50,7 @@ public class JärjekordneProduktiivsuseÄpp {
                         taskmonitor.stop(); // peata taskmonitor
                         System.out.print(menüüA);
                     }
+                    Thread.sleep(500); // oota kuni taskmonitor ennast käivitab või sulgeb
                     näitaSeisu(taskmonitor);
                     System.out.print("tee valik: ");
                     continue;
@@ -154,12 +155,12 @@ public class JärjekordneProduktiivsuseÄpp {
                     System.out.print("Vigane sisend. Proovi uuesti: ");
                 }
             }
-            }
         }
-        private static void näitaSeisu(TaskMonitor taskmonitor){
-            if (taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
-            else System.out.print("Jälgimine: seisab; ");
-            System.out.println("Hetke skoor: " + taskmonitor.getSkoor());
-        }
-
     }
+    private static void näitaSeisu(TaskMonitor taskmonitor){
+        if (taskmonitor.isRunning()) System.out.print("Jälgimine: aktiivne; ");
+        else System.out.print("Jälgimine: seisab; ");
+        System.out.println("Hetke skoor: " + taskmonitor.getSkoor());
+    }
+
+}

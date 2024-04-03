@@ -1,7 +1,6 @@
-////CC BY-SA 4.0
-//Loeb väärtused windows shortcutidest
+//CC BY-SA 4.0
 //https://github.com/maxvollmer/WindowsShortcuts/blob/main/org/stackoverflowusers/file/WindowsShortcut.java
-
+//Loeb väärtused windows shortcutidest
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

@@ -33,13 +33,12 @@ public class KaardistaProgrammid {
 //    inspireeritud ülemisest postitusest, käib rekursiivselt läbi kõik alamkaustad ja lisab leitud failid nimekirja.
     private static List<File> k6ikFailid(String directoryName, int rekursioone){
         File directory = new File(directoryName);
-        // get all the files from a directory
-        File[] fList = directory.listFiles();
-        assert fList != null;
+        File[] fList = directory.listFiles(); // vali kõik failid kaustas
+        assert fList != null; // IntelliJ tugevalt soovitas kinnitada, et kaust ei ole tühi.
         List<File> resultList = new ArrayList<>(Arrays.asList(fList));
-        for (File file : fList) {
-            if (file.isDirectory() && rekursioone != 0){
-                resultList.addAll(k6ikFailid(file.getAbsolutePath(),rekursioone-1));
+        for (File file : fList) { // kordus iga faili kohta kaustas (siin kontekstis on kaustad ka failid)
+            if (file.isDirectory() && rekursioone != 0){ // kui fail on kaust ja ei ole ühe kausta sügavuse piirangut
+                resultList.addAll(k6ikFailid(file.getAbsolutePath(),rekursioone-1)); //siis avame kausta uues rekursiooni sammus
             }
         }
         return resultList;
@@ -68,18 +67,18 @@ public class KaardistaProgrammid {
                 } catch (ParseException e) {
                     continue;
                 }
-                String sihtfail = shortcut.getRealFilename();
-                laiend = shortcut.getRealFilename().substring(sihtfail.length()-4);
-                if(laiend.equals(".exe")){
-                    String argumendid = shortcut.getCommandLineArguments();
-                    if(Objects.equals(argumendid, null))
-                        programmid.add(sihtfail);
-                    else
-                        programmid.add(sihtfail + " " + shortcut.getCommandLineArguments());
+                String sihtfail = shortcut.getRealFilename(); //leia lühitee poolt viidatud absoluutse aadressi
+                laiend = shortcut.getRealFilename().substring(sihtfail.length()-4); //leia faililaiend
+                if(laiend.equals(".exe")){ // kui tegemist on rakendusega
+                    String argumendid = shortcut.getCommandLineArguments(); // leia rakendusele lühitees antavad parameetrid
+                    if(Objects.equals(argumendid, null)) //kui lisaparameetreid ei ole
+                        programmid.add(sihtfail); // siis lisa rakenduse absoluutne aadress programmide nimekirja
+                    else // kui on lisaparameetreid
+                        programmid.add(sihtfail + " " + shortcut.getCommandLineArguments());// siis lisa need koos rakenduse aadressiga programmide nimekirja
                 }
             }
         }
-        return programmid;
+        return programmid; // tagasta programmide nimekiri
     }
 
 }
