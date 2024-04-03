@@ -74,9 +74,45 @@ Kasutaja sisestab "5" (EXIT):
 ### Skoori logi
     ¤
 
+## Töö protsess
 
-### Mis võiks veel juures olla
+### Rühmaliikmete panus
+
+Ander Saarniit:
+* klass - FirstTimeSetup (alpha versioonis. Lõpptööst eemaldatud, selle asemel klass - Setup)
+* klass - avaApp (Lõpptöös Abi klassi meetod - käivita)
+* peameetodis lisatud funktsionaalsused
+* Notioni lehekülg - detailne töö planeering
+* debugimine
+ORIENTEERUV AJAKULU: 13 tundi
+
+Arno Pilvar:
+*
+ORIENTEERUV AJAKULU:
+
+### Tegemise mured
+
+Windows 11 failisüsteemist kasutaja allalaetud rakenduste leidmine:
+* Peamine rühmatöö ajakulu läks selle probleemi lahendamisele.
+* Windows 11 failisüsteemis ei ole kindlat kohta kust kõik kasutaja allalaetud rakendused leida.
+* Enamus lahendustest nõudsid kõrgendatud õiguseid, mida tahtsime vältida.
+* Alternatiivina on sama mure varem lahendatud MacOS peal, kus kõik kasutaja allalaetud rakendused asuvad Application kaustas ja nime lõpus on ".app". Rühmatöö kõikidel liikmetel ei olnud Mac arvutit ja Windows 11 üldiselt populaarsem, seega keskenduti ainult Windows 11 peale.
+
+Programmi eesmärgi lahendamiseks tuli kasutada multithreadimist:
+* Rakenduste protsesside jälgimiseks oli vaja kasutada mitut lõime, et kasutaja saaks jätkata muude tegevustega, samal ajal kui programm jälgib rakendusi.
+* Mõned rühmaliikmed ei olnud multithreadimisega kunagi kokku puutunud.
+
+## Programmi testimine
+
+Programmi testimiseks, üritati programmi kasutada igat võimaliku erijuhtu silmas pidades. Programmi üritati meelega katki teha, kui selle meetodiga mingi viga leiti, parandati viga ära ja prooviti uuesti katki teha.
+
+## Hinnang
+
+Arvame, et töö vastab ootustele ja autorid on programmi tööga rahul. Programmiga on hästi hakkama saadud, kuigi veel on mõned funktsioonid mis on puudu või ei tööta täiesti perfektselt. Näiteks võiks veel programm:
 * Leida Steami kaust Windowsi registrist
 * Leida teiste platvormide mängud
 * Leida kõik Steami mänguraamatukogud
-* 
+* Karistada kasutajat, kui ta kasutab ebaproduktiivset rakendust ja skoor jookseb nulli
+* Sulgeda ebaproduktiivseid rakendusi kui skoor on madal
+* Näidata selgelt kasutajale millised rakendused jooksevad ja millised mitte
+* Anda kasutajale võimaluse ise sulgeda programme mis hetkel jooksevad (näiteks nupp mis sulgeb kõik produktiivsed rakendused, ebaproduktiivsed rakendused või kõik rakendused)
