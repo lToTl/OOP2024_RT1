@@ -55,7 +55,11 @@ public class JärjekordneProduktiivsuseÄpp {
                     continue;
                 }
                 case "2": { // 2. "Im feeling lucky"
-                    Abi.käivitaSuvaline(programmid);
+                    if (taskmonitor.getSkoor() < 1) {
+                        System.out.println("Teie skoor on liiga madal, et seda valikut kasutada!");
+                    } else {
+                        Abi.käivitaSuvaline(programmid);
+                    }
                     System.out.print("tee valik: ");
                     continue;
                 }
